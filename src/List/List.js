@@ -21,7 +21,7 @@ class List extends Component {
 				<h3>List:</h3>
 				<p>Display a bullet point list of all the `items` in the state.</p>
 				<ul>
-
+					{this.state.items.map((item, index) => <li key={index}>{item}</li>)}
 				</ul>
 			</div>
 		)

@@ -2,6 +2,23 @@ import React, { Component } from 'react';
 import './Users.scss';
 
 class Users extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			users: []
+		};
+	}
+
+	componentDidMount() {
+		fetch("https://react-exercises.free.beeceptor.com/users")
+			.then((data) => data.json())
+			.then((users) => {
+				console.log(users);
+				this.setState({
+					users
+				});
+			});
+	}
 
 	render() {
 		return (
@@ -12,7 +29,7 @@ class Users extends Component {
 					<code>https://react-exercises.free.beeceptor.com/users</code>
 				</p>
 				<ul>
-
+					{this.state.users.map((user, index) => <li key={index}>{user.name}</li>)}
 				</ul>
 			</div>
 		)

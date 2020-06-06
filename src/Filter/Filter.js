@@ -12,19 +12,28 @@ class Filter extends Component {
 				'Big ant',
 				'Small dinosaur',
 				'Medium dog'
-			]
+			],
+			filter: ""
 		};
+	}
+
+	updateFilter(event) {
+		this.setState({
+			filter: event.target.value
+		});
 	}
 
 	render() {
 		return (
 			<div className="Filter">
 				<p>Filter the list as you type.</p>
-				<input placeholder="Search..." className="Filter__textbox" />
+				<input onChange={this.updateFilter.bind(this)} placeholder="Search..." className="Filter__textbox" />
 				<ul>
-					{this.state.items.map((item, index) => {
-						return <li key={index}>{item}</li>;
-					})}
+					{this.state.items
+						.filter(item => item.toLowerCase().indexOf(this.state.filter.toLowerCase()) > -1)
+						.map((item, index) => {
+							return <li key={index}>{item}</li>;
+						})}
 				</ul>
 			</div>
 		)

@@ -22,7 +22,9 @@ class President extends Component {
 					lastName: 'Obama',
 					image: 'barack.jpeg'
 				}
-			]
+			],
+			selectedPresident: null,
+			name: ""
 		};
 	}
 
@@ -30,13 +32,23 @@ class President extends Component {
 		return (
 			<div className="President">
 				<p>When clicking on a president, display his <strong>full</strong> name below.</p>
-				<div className="president-list">
+				<div
+					className="president-list">
 					{this.state.presidents.map((president, index) => {
-						return <img key={index} src={require('./images/' + president.image)} alt="" />
+						return <img
+							onClick={() => {
+								this.setState({selectedPresident: president});
+							}}
+							key={index}
+							src={require('./images/' + president.image)} alt=""
+						/>
 					})}
 				</div>
 				<div>
-					<strong>You selected: </strong> Full name here
+					<strong>You selected: </strong> {
+					this.state.selectedPresident
+						? this.state.selectedPresident.firstName + " " + this.state.selectedPresident.lastName
+						: ""}
 				</div>
 			</div>
 		)
